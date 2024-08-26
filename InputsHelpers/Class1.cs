@@ -1,4 +1,4 @@
-﻿namespace EmeraldEngine
+﻿namespace InputsHelpers
 {
     public class Class1
     {
