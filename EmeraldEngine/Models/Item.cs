@@ -1,13 +1,11 @@
 ﻿using EmeraldEngine.Universal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmeraldEngine.Models
 {
-    internal class Item:BaseInformation
+    public class Item : BaseInformation
     {
+        public float Weight { get; set; }
+        public float Value { get; set; }
+        public bool Pickable { get; set; }
     }
 }

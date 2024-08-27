@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EmeraldEngine.Models
+﻿namespace EmeraldEngine.Models
 {
     /// <summary>
     /// Gameworld singleton.
@@ -15,13 +8,15 @@ namespace EmeraldEngine.Models
         private Player _player;
         private Room _currentRoom;
         private List<Item> _gameItem;
-        private static Gameworld _instance = null;
+        private static Gameworld? _instance = null;
 
-        private Gameworld() { }
+        private Gameworld()
+        { 
+        }
 
         public static Gameworld Instance()
         {
-            if(_instance==null)
+            if (_instance == null)
             {
                 _instance = new Gameworld();
             }

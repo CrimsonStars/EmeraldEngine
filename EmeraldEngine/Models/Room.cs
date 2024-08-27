@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EmeraldEngine.Universal;
 
 namespace EmeraldEngine.Models
 {
-    internal class Room::BaseInformation
+    public class Room : BaseInformation
     {
+        /// <summary>
+        /// First string = direction_id
+        /// Second string = destination_room_id
+        /// </summary>
+        public Dictionary<string, string> Directions;
+        public List<string> ItemsInRoom;
+
+        public Room() { }
     }
 }

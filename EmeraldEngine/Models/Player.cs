@@ -14,8 +14,11 @@ namespace EmeraldEngine.Models
     /// </summary>
     public class Player: BaseInformation
     {
-
         public List<Item> Inventory { get; set; }
 
+        public Player() :base() 
+        {
+            Inventory = new List<Item>();    
+        }
     }
 }
