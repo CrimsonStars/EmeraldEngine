@@ -1,4 +1,4 @@
-﻿n\\amespace EmeraldEngine.Universal
+﻿namespace EmeraldEngine.Universal
 {
     public abstract class BaseInformation : ExperimentalBaseObject
     {
