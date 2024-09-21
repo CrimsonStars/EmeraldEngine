@@ -1,0 +1,16 @@
+{
+   "roomsCollection": [
+      {
+         "id": "room.A7811363-E957-4337-96A9-E67D2BF39F3A",
+         "name": "_placeholder_text_",
+         "desc": "_placeholder_text_",
+         "directions": [
+            {
+               "activator": "",
+               "where": "",
+               "isActive": true
+            }
+         ]
+      }
+   ]
+}

@@ -1,44 +1,44 @@
 {
-    "itemsCollection": [
-        {
-            "id": "item.989b7764-5685-4bad-bd76-82dd1ece53c4",
-            "name": "",
-            "desc": "",
-            "isPickable": false,
-            "value": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": "item.346a05be-6705-4048-ba94-b43e92bc2a28",
-            "name": "",
-            "desc": "",
-            "isPickable": false,
-            "value": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": "item.a9f7bec4-f803-417c-88cb-646c820d77e8",
-            "name": "",
-            "desc": "",
-            "isPickable": false,
-            "value": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": "item.b7c6db3d-44aa-4af1-b45d-cca29c651c0d",
-            "name": "",
-            "desc": "",
-            "isPickable": false,
-            "value": 0.0,
-            "weight": 0.0
-        },
-        {
-            "id": "item.83bb136c-8d00-41c2-b3aa-d1ce42674aec",
-            "name": "",
-            "desc": "",
-            "isPickable": false,
-            "value": 0.0,
-            "weight": 0.0
-        }
-    ]
+   "itemsCollection": [
+      {
+         "id": "item.989b7764-5685-4bad-bd76-82dd1ece53c4",
+         "name": "",
+         "desc": "",
+         "isPickable": false,
+         "value": 0.0,
+         "weight": 0.0
+      },
+      {
+         "id": "item.346a05be-6705-4048-ba94-b43e92bc2a28",
+         "name": "",
+         "desc": "",
+         "isPickable": false,
+         "value": 0.0,
+         "weight": 0.0
+      },
+      {
+         "id": "item.a9f7bec4-f803-417c-88cb-646c820d77e8",
+         "name": "",
+         "desc": "",
+         "isPickable": false,
+         "value": 0.0,
+         "weight": 0.0
+      },
+      {
+         "id": "item.b7c6db3d-44aa-4af1-b45d-cca29c651c0d",
+         "name": "",
+         "desc": "",
+         "isPickable": false,
+         "value": 0.0,
+         "weight": 0.0
+      },
+      {
+         "id": "item.83bb136c-8d00-41c2-b3aa-d1ce42674aec",
+         "name": "",
+         "desc": "",
+         "isPickable": false,
+         "value": 0.0,
+         "weight": 0.0
+      }
+   ]
 }
