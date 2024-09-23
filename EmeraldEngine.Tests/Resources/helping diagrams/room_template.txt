@@ -1,0 +1,28 @@
+{
+    "roomsCollection": [
+        {
+            "id": "room A",
+            "name": "_placeholder_text_",
+            "desc": "_placeholder_text_",
+            "directions": [
+                {
+                    "activator": "",
+                    "destination": "",
+                    "isActive": true
+                }
+            ]
+        },
+        {
+            "id": "room B",
+            "name": "_placeholder_text_",
+            "desc": "_placeholder_text_",
+            "directions": [
+                {
+                    "activator": "",
+                    "destination": "",
+                    "isActive": false
+                }
+            ]
+        }
+    ]
+}
