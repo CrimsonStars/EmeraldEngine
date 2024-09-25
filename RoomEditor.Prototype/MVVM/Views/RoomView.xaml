@@ -9,6 +9,14 @@
       Title="RoomView">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="2">I'm in the second row, yeah!</Label>
     </Grid>
 </Page>

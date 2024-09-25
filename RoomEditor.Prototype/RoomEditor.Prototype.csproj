@@ -12,4 +12,8 @@
     <Folder Include="MVVM\ViewModels\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EmeraldEngine\EmeraldEngine.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -11,5 +11,11 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
+        <Frame Grid.Column="0" Source="mvvm/views/ButtonsMenuView.xaml"/>
+        <Frame Grid.Column="1" Source="mvvm/views/RoomView.xaml"/>
+
     </Grid>
+    
+    
 </Window>
