@@ -8,9 +8,21 @@ namespace EmeraldEngine.Models
         /// First string = direction_id
         /// Second string = destination_room_id
         /// </summary>
-        public Dictionary<string, string> Directions;
-        public List<string> ItemsInRoom;
 
-        public Room() { }
+        // Names will be changed in the future, for sure
+        public List<string> DirectionsToGo;
+
+        public List<string> ItemsInTheRoom;
+
+        #region Constructors
+        public Room()
+        {
+            Description = string.Empty;
+            DirectionsToGo = new List<string>();
+            ItemsInTheRoom = new List<string>();
+            ObjectId = $"ROOM.{Guid.NewGuid()}";
+            Description = string.Empty;
+        }
+        #endregion
     }
 }
