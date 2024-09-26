@@ -4,24 +4,25 @@ namespace EmeraldEngine.Models
 {
     public class Room : BaseInformation
     {
-        /// <summary>
-        /// First string = direction_id
-        /// Second string = destination_room_id
-        /// </summary>
-
         // Names will be changed in the future, for sure
+        #region Properties and fields
         public List<string> DirectionsToGo;
-
         public List<string> ItemsInTheRoom;
+        #endregion
 
         #region Constructors
-        public Room()
+        public Room() : base()
         {
-            Description = string.Empty;
             DirectionsToGo = new List<string>();
             ItemsInTheRoom = new List<string>();
             ObjectId = $"ROOM.{Guid.NewGuid()}";
-            Description = string.Empty;
+        }
+
+        public Room(string id, string name, string desc) : this()
+        {
+            ObjectId = id;
+            Description = desc;
+            Name = name;
         }
         #endregion
     }
