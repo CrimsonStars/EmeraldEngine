@@ -24,7 +24,7 @@
         {
             LMB = false;
             RMB = false;
-            MMB = false;
+            MMB = false; 
         }
     }
 }

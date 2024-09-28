@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmeraldEngine", "EmeraldEng
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmeraldEngine.Tests", "EmeraldEngine.Tests\EmeraldEngine.Tests.csproj", "{69F4663C-5A5C-44DA-AB5D-2164A6A4EE8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputSupport", "InputSupport\InputSupport.csproj", "{9C1B5C31-0A1A-4776-BE45-47ED73DA80A2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputTesting.ConsoleApp", "InputTesting.ConsoleApp\InputTesting.ConsoleApp.csproj", "{08A83C60-48F6-480B-8342-4B11FBA89DBA}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{69F4663C-5A5C-44DA-AB5D-2164A6A4EE8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69F4663C-5A5C-44DA-AB5D-2164A6A4EE8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69F4663C-5A5C-44DA-AB5D-2164A6A4EE8E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9C1B5C31-0A1A-4776-BE45-47ED73DA80A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C1B5C31-0A1A-4776-BE45-47ED73DA80A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C1B5C31-0A1A-4776-BE45-47ED73DA80A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C1B5C31-0A1A-4776-BE45-47ED73DA80A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{08A83C60-48F6-480B-8342-4B11FBA89DBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{08A83C60-48F6-480B-8342-4B11FBA89DBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08A83C60-48F6-480B-8342-4B11FBA89DBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
