@@ -4,20 +4,20 @@ namespace InputTesting.ConsoleApp.Model.Additional_structures
 {
     public class Vector2d
     {
-        public float X { get; set; }
-        public float Y { get; set; }
+        public float U { get; set; }
+        public float V { get; set; }
 
         public Vector2d Normalise()
         {
             var result = new Vector2d();
-            var maxValue = X > Y ? X : Y;
+            var maxValue = U > V ? U : V;
 
             if (maxValue > 0.0f)
             {
                 result = new Vector2d()
                 {
-                    X = X / maxValue,
-                    Y = Y / maxValue,
+                    U = U / maxValue,
+                    V = V / maxValue,
                 };
             }
 
@@ -26,26 +26,34 @@ namespace InputTesting.ConsoleApp.Model.Additional_structures
 
         public static Vector2d operator +(Vector2d left, Vector2d right)
         {
-            return new Vector2d(left.X+right.X, left.Y+right.Y);
+            return new Vector2d(left.U+right.U, left.V+right.V);
         }
 
-        // TO DO
-        //public static Vector2d operator - {Vector2d a, Vector2d b)
-        //{
-            
-        //}
+        public static Vector2d operator -(Vector2d left, Vector2d right)
+        {
+            return left + -right;
+        }
 
-        public override string ToString() => $"X = {X}; Y = {Y};";
+        public static Vector2d operator -(Vector2d inputVector)
+        {
+            return new Vector2d()
+            {
+                U = -inputVector.U,
+                V = -inputVector.V,
+            };
+        }
+
+        public override string ToString() => $"X = {U}; Y = {V};";
 
         #region Public constructors
         public Vector2d(float x, float y)
         {
-            X = x;
-            Y = y;
+            U = x;
+            V = y;
         }
 
         /// <summary>
-        /// Returns default 2D vector = [0; 0]
+        /// Returns default 2D zero vector = [0; 0]
         /// </summary>
         public Vector2d() => new Vector2d(0.0f, 0.0f);
         #endregion
