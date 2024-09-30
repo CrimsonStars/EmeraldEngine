@@ -1,6 +1,4 @@
-﻿using System.Data.Common;
-
-namespace InputTesting.ConsoleApp.Model.Additional_structures
+﻿namespace InputTesting.ConsoleApp.Model.Additional_structures
 {
     public class Vector2d
     {
@@ -26,15 +24,15 @@ namespace InputTesting.ConsoleApp.Model.Additional_structures
 
         public static Vector2d operator +(Vector2d left, Vector2d right)
         {
-            return new Vector2d(left.U+right.U, left.V+right.V);
+            return new Vector2d(left.U + right.U, left.V + right.V);
         }
 
         public static Vector2d operator -(Vector2d left, Vector2d right)
         {
-            return left + -right;
+            return left + !right;
         }
 
-        public static Vector2d operator -(Vector2d inputVector)
+        public static Vector2d operator !(Vector2d inputVector)
         {
             return new Vector2d()
             {
@@ -43,9 +41,24 @@ namespace InputTesting.ConsoleApp.Model.Additional_structures
             };
         }
 
-        public override string ToString() => $"X = {U}; Y = {V};";
+        public float Module()
+        {
+            return (float)Math.Sqrt(Math.Pow((double)U, 2.0) + Math.Pow((double)V, 2.0));
+        }
+
+        public static Vector2d operator *(Vector2d input, float scalar)
+        {
+            return new Vector2d()
+            {
+                U = scalar * input.U,
+                V = scalar * input.V,
+            };
+        }
+
+        public override string ToString() => $"U = {U}; V = {V};";
 
         #region Public constructors
+
         public Vector2d(float x, float y)
         {
             U = x;
@@ -56,6 +69,7 @@ namespace InputTesting.ConsoleApp.Model.Additional_structures
         /// Returns default 2D zero vector = [0; 0]
         /// </summary>
         public Vector2d() => new Vector2d(0.0f, 0.0f);
-        #endregion
+
+        #endregion Public constructors
     }
 }

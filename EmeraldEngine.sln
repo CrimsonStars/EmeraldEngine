@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmeraldEngine", "EmeraldEng
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmeraldEngine.Tests", "EmeraldEngine.Tests\EmeraldEngine.Tests.csproj", "{69F4663C-5A5C-44DA-AB5D-2164A6A4EE8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputTesting.ConsoleApp", "InputTesting.ConsoleApp\InputTesting.ConsoleApp.csproj", "{08A83C60-48F6-480B-8342-4B11FBA89DBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InputTesting.ConsoleApp", "InputTesting.ConsoleApp\InputTesting.ConsoleApp.csproj", "{08A83C60-48F6-480B-8342-4B11FBA89DBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
