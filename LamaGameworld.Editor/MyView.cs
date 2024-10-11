@@ -12,11 +12,27 @@ namespace LamaGameworld.Editor
 {
     public partial class MyView
     {
+        private string _currentView;
 
         public MyView()
         {
-            InitializeComponent();
-            button1.Clicked += () => MessageBox.Query("Hello", "Hello There!", "Ok");
+            _currentView = "Siema";
+
+            switch (_currentView)
+            {
+                case "Siema":
+                    Elson();
+                    break;
+                case "ooo":
+                    ConstructWindow();
+                    break;
+                default:
+                    break;
+            }
+
+
+            //InitializeComponent();
+            //button1.Clicked += () => MessageBox.Query("Hello", "Hello There!", "Ok");
         }
     }
 }

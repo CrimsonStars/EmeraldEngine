@@ -1,13 +1,19 @@
 ﻿using LamaGameworld.Editor;
 using Terminal.Gui;
 
-Application.Init();
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        Application.Init();
 
-try
-{
-    Application.Run(new MyView());
-}
-finally
-{
-    Application.Shutdown();
+        try
+        {
+            Application.Run(new MyView());
+        }
+        finally
+        {
+            Application.Shutdown();
+        }
+    }
 }
