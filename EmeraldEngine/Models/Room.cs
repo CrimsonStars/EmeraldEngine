@@ -6,8 +6,8 @@ namespace EmeraldEngine.Models
     {
         // Names will be changed in the future, for sure
         #region Properties and fields
-        public List<string> DirectionsToGo;
-        public List<string> ItemsInTheRoom;
+        private List<string> DirectionsToGo;
+        private List<string> ItemsInTheRoom;
         #endregion
 
         #region Constructors
@@ -25,5 +25,28 @@ namespace EmeraldEngine.Models
             Name = name;
         }
         #endregion
+
+        public void AddItemsInRoom(params  string[] items)
+        {
+            foreach (var item in items)
+            {
+                if (!ItemsInTheRoom.Any(itemz => itemz == item))
+                {
+                    ItemsInTheRoom.Add(item);
+                } 
+                else
+                {
+                    throw new Exception($"Room already has item with id: '{item}'");
+                }
+            }
+        }
+
+        public void GetItem(string itemId)
+        {
+            if(ItemsInTheRoom.Any(id => id == itemId))
+            {
+                // do domething
+            }
+        }
     }
 }
