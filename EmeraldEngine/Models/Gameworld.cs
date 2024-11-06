@@ -111,15 +111,13 @@
             #region Construct some rooms
 
             var roomId = "ROOM." + Guid.NewGuid();
-
-            roomId = "ROOM." + Guid.NewGuid();
             _gameRooms[roomId] = new Room()
             {
                 ObjectId = roomId,
                 Name = "ROOM_A",
                 Description = "",
                 DirectionsToGo = {
-                    ("","",false)
+                    ("north", "ROOM_B",false)
                 }
             };
 
@@ -130,7 +128,9 @@
                 Name = "ROOM_B",
                 Description = "",
                 DirectionsToGo = {
-                    ("","",false)
+                    ("north", "ROOM_D",true),
+                    ("wooden door", "ROOM_C",true),
+                    ("south", "ROOM_A",true)
                 }
             };
 
@@ -141,7 +141,9 @@
                 Name = "ROOM_C",
                 Description = "",
                 DirectionsToGo = {
-                    ("","",false)
+                    ("east", "ROOM_E",true),
+                    ("north", "ROOM_G",true),
+                    ("wooden door", "ROOM_B",true)
                 }
             };
 
@@ -152,7 +154,8 @@
                 Name = "ROOM_D",
                 Description = "",
                 DirectionsToGo = {
-                    ("","",false)
+                    ("south", "ROOM_B",true),
+                    ("north", "ROOM_F",true)
                 }
             };
 
@@ -163,7 +166,7 @@
                 Name = "ROOM_E",
                 Description = "",
                 DirectionsToGo = {
-                    ("","",false)
+                    ("west", "ROOM_C",true)
                 }
             };
 
@@ -174,7 +177,7 @@
                 Name = "ROOM_F",
                 Description = "",
                 DirectionsToGo = {
-                    ("","",false)
+                    ("south", "ROOM_D",true)
                 }
             };
 
@@ -185,7 +188,7 @@
                 Name = "ROOM_G",
                 Description = "",
                 DirectionsToGo = {
-                    ("","",false)
+                    ("south", "ROOM_C",false)
                 }
             };
 
