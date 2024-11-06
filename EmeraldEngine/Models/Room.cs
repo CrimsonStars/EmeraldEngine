@@ -6,14 +6,14 @@ namespace EmeraldEngine.Models
     {
         // Names will be changed in the future, for sure
         #region Properties and fields
-        private List<string> DirectionsToGo;
+        public List<(string id, string dest, bool active)> DirectionsToGo;
         private List<string> ItemsInTheRoom;
         #endregion
 
         #region Constructors
         public Room() : base()
         {
-            DirectionsToGo = new List<string>();
+            DirectionsToGo = new List<(string id, string dest, bool active)>();
             ItemsInTheRoom = new List<string>();
             ObjectId = $"ROOM.{Guid.NewGuid()}";
         }
