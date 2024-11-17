@@ -5,11 +5,13 @@
     /// </summary>
     public class Gameworld
     {
+        #region Properties
         private Player _player;
         private Room _currentRoom;
         private Dictionary<string, Item> _gameItem;
         private Dictionary<string, Room> _gameRooms;
         private static Gameworld? _instance = null;
+        #endregion
 
         private Gameworld()
         {
@@ -28,9 +30,6 @@
 
         private void ConstructWorld()
         {
-            _player = new Player();
-            _gameItem = new Dictionary<string, Item>();
-
             #region Populate the items dictionary/list
 
             var id = "ITEM." + Guid.NewGuid();

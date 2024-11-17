@@ -26,14 +26,14 @@ namespace EmeraldEngine.Models
         }
         #endregion
 
-        public void AddItemsInRoom(params  string[] items)
+        public void AddItemsInRoom(params string[] items)
         {
             foreach (var item in items)
             {
                 if (!ItemsInTheRoom.Any(itemz => itemz == item))
                 {
                     ItemsInTheRoom.Add(item);
-                } 
+                }
                 else
                 {
                     throw new Exception($"Room already has item with id: '{item}'");
@@ -43,10 +43,29 @@ namespace EmeraldEngine.Models
 
         public void GetItem(string itemId)
         {
-            if(ItemsInTheRoom.Any(id => id == itemId))
-            {
-                // do domething
-            }
+            throw new NotImplementedException("GetItem method for Room is not implemented, yet.");
         }
+
+        public string ListAvailiableDirections(bool debugMode)
+        {
+            var result = $"AVAILIABLE DIRS: {DirectionsToGo.Count}\n";
+
+            foreach (var dir in DirectionsToGo)
+            {
+                result += $"{dir.id} => {dir.dest}";
+
+                if (debugMode && !dir.active)
+                {
+                    result += $" ({dir.active})\n";
+                }
+
+                result += Environment.NewLine;
+            }
+
+            return result;
+        }
+
+        public string ListAvailiableDirections() => ListAvailiableDirections(false);
+
     }
 }
