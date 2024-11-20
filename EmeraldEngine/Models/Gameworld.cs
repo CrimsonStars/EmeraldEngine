@@ -1,21 +1,33 @@
 ﻿namespace EmeraldEngine.Models
 {
     /// <summary>
-    /// Gameworld singleton.
+    /// Gameworld singleton which contains:
+    /// <list type="bullet">
+    ///     <item>gameworld instance,</item>
+    ///     <item>Player type of... well <typeparamref name="Player"/>,</item>
+    ///     <item>list of all Rooms in gameworld,</item>
+    ///     <item>list of all items in gameworld,</item>
+    ///     <item>current room where player is property (Room type for now).</item>
+    /// </list>
     /// </summary>
     public class Gameworld
     {
         #region Properties
+
         private Player _player;
         private Room _currentRoom;
         private Dictionary<string, Item> _gameItem;
         private Dictionary<string, Room> _gameRooms;
         private static Gameworld? _instance = null;
-        #endregion
+
+        #endregion Properties
+
+        #region Constructors and initiators
 
         private Gameworld()
         {
-            // body
+            _player = new Player();
+            _gameItem = new Dictionary<string, Item>();
         }
 
         public static Gameworld Instance()
@@ -28,7 +40,20 @@
             return _instance;
         }
 
-        private void ConstructWorld()
+        //public static Gameworld MockedGameworldInstance()
+        //{
+        //    if (_instance == null)
+        //    {
+        //        _instance = new Gameworld();
+        //        _instance.ConstructWorld();
+        //    }
+
+        //    return _instance;
+        //}
+
+        #endregion Constructors and initiators
+
+        public void ConstructWorld()
         {
             #region Populate the items dictionary/list
 
