@@ -1,4 +1,5 @@
 ﻿using EmeraldEngine.Universal;
+using System.Collections;
 
 namespace EmeraldEngine.Models
 {
@@ -67,5 +68,8 @@ namespace EmeraldEngine.Models
 
         public string ListAvailiableDirections() => ListAvailiableDirections(false);
 
+        public IEnumerable DupaKredens() {
+            yield return ItemsInTheRoom.GetEnumerator();
+        }
     }
 }
