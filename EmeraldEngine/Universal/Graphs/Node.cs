@@ -1,18 +1,22 @@
 ﻿namespace EmeraldEngine.Universal.Graphs
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     public class Node<T>
     {
         #region Properies
 
-        public T NodeValue { get; set; }
+        public T? NodeValue { get; set; }
         public HashSet<Node<T>> Children { get; set; }
 
         #endregion Properies
 
+        #region Constructors
+
         public Node()
         {
+            NodeValue = default;
             Children = new HashSet<Node<T>>();
         }
 
@@ -21,27 +25,21 @@
             NodeValue = ElementValue;
         }
 
+        #endregion Constructors
+
+        public int AddChildren(params Node<T>[] childrenNodes)
+        {
+            foreach (var node in childrenNodes)
+            {
+                Children.Add(node);
+            }
+
+            return Children.Count;
+        }
+
         public override string ToString()
         {
             return $"VALUE: {NodeValue.ToString()}; CHILDREN_COUNT: {Children.Count};";
-        }
-
-        public Node<T>? MejkSercz(T valju)
-        {
-            Node<T>? result = null;
-
-            foreach (var nudel in Children)
-            {
-                if (nudel.NodeValue.Equals(valju))
-                {
-                    result = nudel;
-                    return result;
-                }
-
-                result = nudel.MejkSercz(valju);
-            }
-
-            return result;
         }
     }
 }

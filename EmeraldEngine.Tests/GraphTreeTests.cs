@@ -1,74 +1,98 @@
-using EmeraldEngine.Models;
-using EmeraldEngine.Universal.Graphs;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace EmeraldEngine.Tests;
-
-[TestClass]
-public class GraphTreeTests
+﻿namespace EmeraldEngine.Tests
 {
+    using EmeraldEngine.Universal.Graphs;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    [TestMethod]
-    public void Given_GraphNode_When_CratingDefailtNodeWithInt_Then_CheckValue()
+    [TestClass]
+    public class GraphTreeTests
     {
-        var testNode = new Node<int>();
+        private GraphTree<char> _sampleGraphTree;
 
-        Assert.IsNotNull(testNode.Children);
-        Assert.IsTrue(!testNode.Children.Any());
-        Assert.AreEqual(0, testNode.NodeValue);
-    }
+        private void ConstructGraphTreeForTests()
+        {
+            // A -> [B, C]
+            // B -> [D]
+            // C -> [E, F, I]
+            // E -> G -> H
 
-    [TestMethod]
-    public void Given_GraphNode_When_NodeValueIsSimpleObject_Then_CheckValue()
-    {
-        var testValue = 'A';
-        var testNode = new Node<char>(testValue);
+            var firstNode = new Node<char>('A');
+            var secondNode = new Node<char>('B');
+            var thirdNode = new Node<char>('C');
+            var fourthNode = new Node<char>('D');
+            var fifthNode = new Node<char>('E');
+            var sixthNode = new Node<char>('F');
+            var seventhNode = new Node<char>('G');
+            var eighthNode = new Node<char>('H');
+            var ninthNode = new Node<char>('I');
 
-        Assert.IsNotNull(testNode.Children);
-        Assert.IsTrue(!testNode.Children.Any());
-        Assert.IsTrue(testNode.NodeValue == testValue);
-    }
+            fifthNode.Children.Add(seventhNode);
+            secondNode.Children.Add(fourthNode);
+            seventhNode.Children.Add(eighthNode);
 
-    [TestMethod]
-    public void Given_GraphNode_When_NodeValueIsClassObject_Then_CheckValue()
-    {
-        var testNode = new Node<Item>();
+            firstNode.AddChildren(secondNode, thirdNode);
+            thirdNode.AddChildren(fifthNode, sixthNode, ninthNode);
 
-        Assert.IsNotNull(testNode.Children);
-        Assert.IsTrue(!testNode.Children.Any());
-        Assert.IsNull(testNode.NodeValue);
-    }
+            _sampleGraphTree = new GraphTree<char>(firstNode);
+        }
 
-    [TestMethod]
-    public void Given_TestGraphNode_When_CreatingChildrenNodes_Then_CheckIfCorrect()
-    {
-        var testNode = new Node<char>('A');
-        testNode.Children.Add(new Node<char>('b'));
-        testNode.Children.Add(new Node<char>('c'));
-        testNode.Children.Add(new Node<char>('d'));
+        [TestMethod]
+        [DataRow('A')]
+        [DataRow('B')]
+        [DataRow('C')]
+        [DataRow('D')]
+        [DataRow('E')]
+        [DataRow('F')]
+        [DataRow('G')]
+        [DataRow('H')]
+        [DataRow('I')]
+        public void Given_Graph_When_LoopInside_Then_CheckIfValueFound(char valueToSearch)
+        {
+            ConstructGraphTreeForTests();
 
-        var anyChildrenHasValueB = testNode.Children.Any(c => c.NodeValue.Equals('b'));
-        var anyChildrenHasValueC = testNode.Children.Any(c => c.NodeValue.Equals('c'));
-        var anyChildrenHasValueD = testNode.Children.Any(c => c.NodeValue.Equals('d'));
-        var anyChildrenHasValueNotUsed = !testNode.Children.Any(c => c.NodeValue.Equals('x'));
+            // insert loop in graph
+            _sampleGraphTree.SearchForNodeWithValue('D').Children.Add(new Node<char>('B'));
 
-        Assert.IsNotNull(testNode.Children);
-        Assert.IsTrue(testNode.Children.Any());
-        Assert.IsTrue(anyChildrenHasValueB);
-        Assert.IsTrue(anyChildrenHasValueC);
-        Assert.IsTrue(anyChildrenHasValueD);
-        Assert.IsTrue(anyChildrenHasValueNotUsed);
-    }
+            var foundNode = _sampleGraphTree.SearchForNodeWithValue(valueToSearch);
 
-    [TestMethod]
-    public void Given_TestGraphNode_When_CreatingChildrenNodes_Then_CheckIfHasUnexpectedValuesNodes()
-    {
-        var testNode = new Node<char>('A');
-        testNode.Children.Add(new Node<char>('a'));
+            Assert.IsNotNull(foundNode);
+            Assert.AreEqual(valueToSearch, foundNode.NodeValue);
+        }
 
-        Assert.IsNotNull(testNode.Children);
-        Assert.IsTrue(testNode.Children.Any());
-        Assert.IsTrue(testNode.Children.Any(c => c.NodeValue.Equals('a')));
-        Assert.IsTrue(!testNode.Children.Any(c => c.NodeValue.Equals('x')));
+        [TestMethod]
+        [DataRow('A')]
+        [DataRow('B')]
+        [DataRow('C')]
+        [DataRow('D')]
+        [DataRow('E')]
+        [DataRow('F')]
+        [DataRow('G')]
+        [DataRow('H')]
+        [DataRow('I')]
+        public void Given_NodeValueToFind_When_SearchTreeWithLoop_Then_CheckIfFound(char valueToSearch)
+        {
+            ConstructGraphTreeForTests();
+
+            var foundNode = _sampleGraphTree.SearchForNodeWithValue(valueToSearch);
+
+            Assert.IsNotNull(foundNode);
+            Assert.AreEqual(valueToSearch, foundNode.NodeValue);
+        }
+
+        [TestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
+        public void Given_SampleGraphWithLoop_When_SearchForNonexistendNode_Then_ReturnNull(bool addLoop)
+        {
+            ConstructGraphTreeForTests();
+
+            if (addLoop)
+            {
+                // insert loop in graph
+                _sampleGraphTree.SearchForNodeWithValue('D').Children.Add(new Node<char>('B'));
+            }
+
+            var result = _sampleGraphTree.SearchForNodeWithValue('x');
+            Assert.IsNull(result);
+        }
     }
 }
