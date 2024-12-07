@@ -135,6 +135,8 @@
 
          #region Construct some rooms
 
+         // I can move those values to res file but it's
+         // something to think about.
          var roomId = "ROOM." + Guid.NewGuid();
          _gameRooms[roomId] = new Room()
          {
@@ -143,7 +145,11 @@
             Description = "",
             DirectionsToGo = {
                     ("north", "ROOM_B",false)
-                }
+                },
+            ItemsInTheRoom =
+            {
+               _gameItem.First(i => i.Value.Name.Equals("Tarot card [XIII]")).Key,
+            }
          };
 
          roomId = "ROOM." + Guid.NewGuid();
@@ -217,7 +223,45 @@
                 }
          };
 
+         // setting initial room (ROOM_A)
+         var firstRoomName = "ROOM_A";
+         _currentRoom = _gameRooms.First(p => p.Value.Name.Equals(firstRoomName)).Value;
+
          #endregion Construct some rooms
       }
+
+
+      #region Sandbox
+
+      // Actions for items:
+      //    TAKE, DROP, LOOK/INSPECT, USE, USE ON
+
+      // Mostly for debugging
+      public string CurrentRoomInfoDump()
+      {
+         var result =
+            $"CURRENT ROOM: '{_currentRoom.ObjectId}'\n" +
+            $"ROOM_ID:      '{_currentRoom.Name}'\n\n";
+
+         var dirsToGo = "AVAILIABLE DIRS:\n";
+         foreach (var j in _currentRoom.DirectionsToGo)
+         {
+            var isActive = j.active ? "Tru" : "Fls";
+            dirsToGo += $"\t'{j.id}' -> '{j.dest}' [{isActive}]\n";
+         }
+         dirsToGo += '\n';
+
+         var itemsToCheck = $"ITEMS IN THE ROOM ({_currentRoom.ItemsInTheRoom.Count}):\n";
+         foreach (var ajtem in _currentRoom.ItemsInTheRoom)
+         {
+            var item = _gameItem[ajtem];
+            itemsToCheck += $"\t'{item.Name}' ({ajtem}; pickable: {item.Pickable})";
+         }
+         itemsToCheck += '\n';
+
+         return $"{result}{dirsToGo}{itemsToCheck}";
+      }
+
+      #endregion
    }
 }
