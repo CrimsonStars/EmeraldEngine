@@ -6,8 +6,6 @@ namespace EmeraldEngine.Tests
    [TestClass]
    public class GameworldTests
    {
-      //private static Gameworld? _gameworldEntity;
-
       [ClassInitialize]
       public static void ClassInit(TestContext context)
       {
@@ -26,7 +24,7 @@ namespace EmeraldEngine.Tests
 
          Assert.IsNotNull(gameRooms);
          Assert.IsTrue(gameRooms.Any());
-         Assert.AreEqual(gameRooms.Count, 7);
+         Assert.AreEqual(7, gameRooms.Count);
       }
 
       [TestMethod]
@@ -36,7 +34,7 @@ namespace EmeraldEngine.Tests
 
          Assert.IsNotNull(gameItems);
          Assert.IsTrue(gameItems.Any());
-         Assert.AreEqual(gameItems.Count, 6);
+         Assert.AreEqual(6, gameItems.Count);
       }
 
       [TestMethod]
