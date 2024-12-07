@@ -17,18 +17,15 @@ namespace EmeraldEngine.Tests
       }
 
       [TestMethod]
-      public void SillySimpleTests()
-      {
-         Assert.IsNotNull(_gameworld);
-      }
-
-      [TestMethod]
       [TestCategory("Sandbox - not for final")]
       public void _SandboxTests_00()
       {
-         Trace.Write(_gameworld.CurrentRoomInfoDump());
+         Assert.IsNotNull(_gameworld);
 
-         Assert.Fail();
+         var result = _gameworld.CurrentRoomInfoDump();
+         Trace.Write(result);
+
+         Assert.AreNotEqual(string.Empty, result);
       }
    }
 }
