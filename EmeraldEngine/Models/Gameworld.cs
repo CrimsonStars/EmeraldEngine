@@ -1,4 +1,6 @@
-﻿namespace EmeraldEngine.Models
+﻿using System.Diagnostics;
+
+namespace EmeraldEngine.Models
 {
    /// <summary>
    /// Gameworld singleton which contains:
@@ -12,7 +14,7 @@
    /// </summary>
    public class Gameworld
    {
-      #region Properties
+      #region Private and public properties
 
       private static Gameworld? _instance = null;
       public Room _currentRoom { get; private set; }
@@ -41,18 +43,14 @@
          return _instance;
       }
 
-      //public static Gameworld MockedGameworldInstance()
-      //{
-      //    if (_instance == null)
-      //    {
-      //        _instance = new Gameworld();
-      //        _instance.ConstructWorld();
-      //    }
-
-      //    return _instance;
-      //}
-
       #endregion Constructors and initiators
+
+      #region Const strings
+      private const string NORTH = "north";
+      private const string SOUTH = "south";
+      private const string EAST = "east";
+      private const string WEST = "west";
+      #endregion
 
       public void ConstructWorld()
       {
@@ -88,7 +86,7 @@
             Description = "Pirogi do nogi i syngal to wrogi. It's a prank item, bra!",
             Value = 0.0f,
             Weight = 0.0f,
-            Pickable = false,
+            Pickable = true,
          };
 
          id = "ITEM." + Guid.NewGuid();
@@ -124,6 +122,18 @@
             Pickable = false,
          };
 
+         // const item for testing
+         var constId = "ITEM.CONST_ITEM_NAME_ID";
+         _gameItem[constId] = new Item()
+         {
+            Name = "Sample item with hardcoded id",
+            ObjectId = constId,
+            Description = "Hardcoded item. Nothing special, mostly for testing...",
+            Value = -1.0f,
+            Weight = -1.0f,
+            Pickable = false,
+         };
+
          #endregion Populate the items dictionary/list
 
          #region The player is being created here
@@ -133,22 +143,25 @@
 
          #endregion The player is being created here
 
-         #region Construct some rooms
+         #region Construct game rooms for testing
 
          // I can move those values to res file but it's
          // something to think about.
+         // TODO: Add builder for rooms for comort!
          var roomId = "ROOM." + Guid.NewGuid();
          _gameRooms[roomId] = new Room()
          {
             ObjectId = roomId,
             Name = "ROOM_A",
-            Description = "",
+            Description = "Starting room with two items. This room is set" +
+            "as first in the '_currentRoom' property of Gameworld class.",
             DirectionsToGo = {
-                    ("north", "ROOM_B",false)
+                    (NORTH, "ROOM_B",true)
                 },
             ItemsInTheRoom =
             {
                _gameItem.First(i => i.Value.Name.Equals("Tarot card [XIII]")).Key,
+               _gameItem.First(i => i.Value.Name.Equals("Rusty knife")).Key,
             }
          };
 
@@ -157,11 +170,11 @@
          {
             ObjectId = roomId,
             Name = "ROOM_B",
-            Description = "",
+            Description = string.Empty,
             DirectionsToGo = {
-                    ("north", "ROOM_D",true),
-                    ("wooden door", "ROOM_C",true),
-                    ("south", "ROOM_A",true)
+                    (NORTH, "ROOM_D", true),
+                    ("wooden door", "ROOM_C", true),
+                    (SOUTH, "ROOM_A", true)
                 }
          };
 
@@ -170,10 +183,10 @@
          {
             ObjectId = roomId,
             Name = "ROOM_C",
-            Description = "",
+            Description = string.Empty,
             DirectionsToGo = {
-                    ("east", "ROOM_E",true),
-                    ("north", "ROOM_G",true),
+                    (EAST, "ROOM_E",true),
+                    (NORTH, "ROOM_G",true),
                     ("wooden door", "ROOM_B",true)
                 }
          };
@@ -183,10 +196,10 @@
          {
             ObjectId = roomId,
             Name = "ROOM_D",
-            Description = "",
+            Description = string.Empty,
             DirectionsToGo = {
-                    ("south", "ROOM_B",true),
-                    ("north", "ROOM_F",true)
+                    (SOUTH, "ROOM_B",true),
+                    (NORTH, "ROOM_F",true)
                 }
          };
 
@@ -195,9 +208,9 @@
          {
             ObjectId = roomId,
             Name = "ROOM_E",
-            Description = "",
+            Description = string.Empty,
             DirectionsToGo = {
-                    ("west", "ROOM_C",true)
+                    (WEST, "ROOM_C",true)
                 }
          };
 
@@ -206,9 +219,9 @@
          {
             ObjectId = roomId,
             Name = "ROOM_F",
-            Description = "",
+            Description = string.Empty,
             DirectionsToGo = {
-                    ("south", "ROOM_D",true)
+                    (SOUTH, "ROOM_D",true)
                 }
          };
 
@@ -217,9 +230,9 @@
          {
             ObjectId = roomId,
             Name = "ROOM_G",
-            Description = "",
+            Description = string.Empty,
             DirectionsToGo = {
-                    ("south", "ROOM_C",false)
+                    (SOUTH, "ROOM_C",false)
                 }
          };
 
@@ -230,13 +243,10 @@
          #endregion Construct some rooms
       }
 
-
       #region Sandbox
 
-      // Actions for items:
-      //    TAKE, DROP, LOOK/INSPECT, USE, USE ON
-
       // Mostly for debugging
+      // TODO: Change variable names
       public string CurrentRoomInfoDump()
       {
          var result =
@@ -260,6 +270,36 @@
          itemsToCheck += '\n';
 
          return $"{result}{dirsToGo}{itemsToCheck}";
+      }
+
+      public void ChangeProperty()
+      {
+         // TODO: Implement
+      }
+
+      // change room
+      public void _ideSobie(string roomId)
+      {
+         _gameRooms.TryGetValue(roomId, out var nextRoom);
+         _currentRoom = nextRoom;
+      }
+
+      public void _biereSe(string itemId)
+      {
+         if (_gameItem.ContainsKey(itemId) && _gameItem[itemId].Pickable)
+         {
+            _currentRoom.ItemsInTheRoom.Remove(itemId);
+            _player.Inventory.Add(_gameItem[itemId]);
+
+            //Trace.WriteLine($"Item id = '{itemId}' removed from the room.");
+            //Trace.WriteLine($"Player picked item with id = '{itemId}'.");
+            //Trace.WriteLine($"Player item count = {_player.Inventory.Count}");
+            //Trace.WriteLine($"Current room item count = {_currentRoom.ItemsInTheRoom.Count}");
+         }
+         else
+         {
+            throw new Exception();
+         }
       }
 
       #endregion
