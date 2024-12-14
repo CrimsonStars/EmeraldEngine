@@ -49,8 +49,8 @@ namespace EmeraldEngine.Tests
             Assert.IsNotNull(SampleGameworld._currentRoom);
         }
 
-
         #region SANDBOX
+
         [TestMethod]
         public void Given_RoomWithSpecificName_When_GoingTo_Then_CheckIfGoneRight()
         {
@@ -84,7 +84,7 @@ namespace EmeraldEngine.Tests
             Assert.IsNotNull(SampleGameworld._currentRoom);
             Assert.AreEqual("ROOM_C", SampleGameworld._currentRoom.Name);
 
-            Trace.WriteLine(SampleGameworld.CurrentRoomInfoDump() +'\n');
+            Trace.WriteLine(SampleGameworld.CurrentRoomInfoDump() + '\n');
         }
 
         [TestMethod]
@@ -124,6 +124,7 @@ namespace EmeraldEngine.Tests
             Assert.AreEqual(2, SampleGameworld._player.Inventory.Count);
             Assert.IsFalse(SampleGameworld._currentRoom.ItemsInTheRoom.Any());
         }
-        #endregion
+
+        #endregion SANDBOX
     }
 }

@@ -20,7 +20,7 @@
         public Dictionary<string, Item> _gameItem { get; private set; }
         public Dictionary<string, Room> _gameRooms { get; private set; }
 
-        #endregion Properties
+        #endregion Private and public properties
 
         #region Constructors and initiators
 
@@ -44,11 +44,13 @@
         #endregion Constructors and initiators
 
         #region Const strings
+
         private const string NORTH = "north";
         private const string SOUTH = "south";
         private const string EAST = "east";
         private const string WEST = "west";
-        #endregion
+
+        #endregion Const strings
 
         private string CreateGuid(string prefix)
         {
@@ -245,7 +247,7 @@
             var firstRoomName = "ROOM_A";
             _currentRoom = _gameRooms.First(p => p.Value.Name.Equals(firstRoomName)).Value;
 
-            #endregion Construct some rooms
+            #endregion Construct game rooms for testing
         }
 
         #region Sandbox
@@ -302,6 +304,6 @@
             }
         }
 
-        #endregion
+        #endregion Sandbox
     }
 }
