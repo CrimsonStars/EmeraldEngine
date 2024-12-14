@@ -15,17 +15,5 @@ namespace EmeraldEngine.Tests
          _gameworld = Gameworld.Instance();
          _gameworld.ConstructWorld();
       }
-
-      [TestMethod]
-      [TestCategory("Sandbox - not for final")]
-      public void _SandboxTests_00()
-      {
-         Assert.IsNotNull(_gameworld);
-
-         var result = _gameworld.CurrentRoomInfoDump();
-         Trace.Write(result);
-
-         Assert.AreNotEqual(string.Empty, result);
-      }
    }
 }
