@@ -18,6 +18,7 @@ namespace EmeraldEngine.Models
 
         public Player() :base() 
         {
+            Description = string.Empty;
             Inventory = new List<Item>();    
         }
     }
