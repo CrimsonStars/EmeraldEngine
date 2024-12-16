@@ -9,6 +9,7 @@
 
         public T? NodeValue { get; set; }
         public HashSet<Node<T>> Children { get; set; }
+        public bool IsActive { get; set; }
 
         #endregion Properies
 

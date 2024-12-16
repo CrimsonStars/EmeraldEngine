@@ -6,7 +6,11 @@
     [TestClass]
     public class GraphTreeTests
     {
-        private GraphTree<char> _sampleGraphTree;
+        #region Private properties
+
+        private GraphTree<char>? SampleGraphTree;
+
+        #endregion Private properties
 
         private void ConstructGraphTreeForTests()
         {
@@ -32,7 +36,7 @@
             firstNode.AddChildren(secondNode, thirdNode);
             thirdNode.AddChildren(fifthNode, sixthNode, ninthNode);
 
-            _sampleGraphTree = new GraphTree<char>(firstNode);
+            SampleGraphTree = new GraphTree<char>(firstNode);
         }
 
         [TestMethod]
@@ -49,10 +53,10 @@
         {
             ConstructGraphTreeForTests();
 
-            // insert loop in graph
-            _sampleGraphTree.SearchForNodeWithValue('D').Children.Add(new Node<char>('B'));
+            // insert loop in the graph
+            SampleGraphTree.SearchForNodeWithValue('D').Children.Add(new Node<char>('B'));
 
-            var foundNode = _sampleGraphTree.SearchForNodeWithValue(valueToSearch);
+            var foundNode = SampleGraphTree.SearchForNodeWithValue(valueToSearch);
 
             Assert.IsNotNull(foundNode);
             Assert.AreEqual(valueToSearch, foundNode.NodeValue);
@@ -72,7 +76,7 @@
         {
             ConstructGraphTreeForTests();
 
-            var foundNode = _sampleGraphTree.SearchForNodeWithValue(valueToSearch);
+            var foundNode = SampleGraphTree.SearchForNodeWithValue(valueToSearch);
 
             Assert.IsNotNull(foundNode);
             Assert.AreEqual(valueToSearch, foundNode.NodeValue);
@@ -87,11 +91,11 @@
 
             if (addLoop)
             {
-                // insert loop in graph
-                _sampleGraphTree.SearchForNodeWithValue('D').Children.Add(new Node<char>('B'));
+                // insert loop in the graph
+                SampleGraphTree.SearchForNodeWithValue('D').Children.Add(new Node<char>('B'));
             }
 
-            var result = _sampleGraphTree.SearchForNodeWithValue('x');
+            var result = SampleGraphTree.SearchForNodeWithValue('x');
             Assert.IsNull(result);
         }
     }

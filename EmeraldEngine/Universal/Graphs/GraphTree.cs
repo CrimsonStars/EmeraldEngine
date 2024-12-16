@@ -1,15 +1,11 @@
 ﻿namespace EmeraldEngine.Universal.Graphs
 {
-    using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public class GraphTree<T>
     {
-        private Node<T>? StartingNode {  get; set; }
+        private Node<T>? StartingNode { get; set; }
 
         #region Constructors
 
