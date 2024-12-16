@@ -7,7 +7,11 @@ namespace EmeraldEngine.Tests
     [TestClass]
     public class GameworldTests
     {
+        #region Private test properties
+
         private static Gameworld SampleGameworld;
+
+        #endregion
 
         [ClassInitialize]
         public static void ClassInit(TestContext context)
@@ -49,8 +53,6 @@ namespace EmeraldEngine.Tests
             Assert.IsNotNull(SampleGameworld._currentRoom);
         }
 
-        #region SANDBOX
-
         [TestMethod]
         public void Given_RoomWithSpecificName_When_GoingTo_Then_CheckIfGoneRight()
         {
@@ -67,24 +69,31 @@ namespace EmeraldEngine.Tests
         [TestMethod]
         public void Given_Gameworld_When_MovingInCertainPath_Then_CheckIfRouteIsCorrect()
         {
-            // A -> B -> C-> E -> C
-            Trace.WriteLine(SampleGameworld.CurrentRoomInfoDump() + '\n');
-
-            SampleGameworld.ChangeCurrentLocation("ROOM_B");
-            SampleGameworld.ChangeCurrentLocation("ROOM_C");
-
-            Assert.IsNotNull(SampleGameworld._currentRoom);
-            Assert.AreEqual("ROOM_C", SampleGameworld._currentRoom.Name);
-
-            SampleGameworld.ChangeCurrentLocation("ROOM_E");
-            Assert.AreEqual("ROOM_E", SampleGameworld._currentRoom.Name);
-
-            SampleGameworld.ChangeCurrentLocation("ROOM_C");
+            // route: A -> B -> C-> E -> C
+            var firstRoom = "ROOM_A";
+            var secondRoom = "ROOM_B";
+            var thirdRoom = "ROOM_C";
+            var fourthRoom = "ROOM_E";
 
             Assert.IsNotNull(SampleGameworld._currentRoom);
-            Assert.AreEqual("ROOM_C", SampleGameworld._currentRoom.Name);
+            Assert.AreEqual(firstRoom, SampleGameworld._currentRoom.Name);
+            Trace.Write(SampleGameworld.CurrentRoomInfoDump() + "\n\n");
 
-            Trace.WriteLine(SampleGameworld.CurrentRoomInfoDump() + '\n');
+            SampleGameworld.ChangeCurrentLocation(secondRoom);
+            SampleGameworld.ChangeCurrentLocation(thirdRoom);
+
+            Assert.IsNotNull(SampleGameworld._currentRoom);
+            Assert.AreEqual(thirdRoom, SampleGameworld._currentRoom.Name);
+
+            SampleGameworld.ChangeCurrentLocation(fourthRoom);
+            Assert.AreEqual(fourthRoom, SampleGameworld._currentRoom.Name);
+
+            SampleGameworld.ChangeCurrentLocation(thirdRoom);
+
+            Assert.IsNotNull(SampleGameworld._currentRoom);
+            Assert.AreEqual(thirdRoom, SampleGameworld._currentRoom.Name);
+
+            Trace.Write(SampleGameworld.CurrentRoomInfoDump() + "\n\n");
         }
 
         [TestMethod]
@@ -124,7 +133,5 @@ namespace EmeraldEngine.Tests
             Assert.AreEqual(2, SampleGameworld._player.Inventory.Count);
             Assert.IsFalse(SampleGameworld._currentRoom.ItemsInTheRoom.Any());
         }
-
-        #endregion SANDBOX
     }
 }
