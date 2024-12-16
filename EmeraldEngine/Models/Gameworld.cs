@@ -52,6 +52,8 @@
 
         #endregion Const strings
 
+        #region Helper methods
+
         private string CreateGuid(string prefix)
         {
             return $"{prefix}.{Guid.NewGuid()}";
@@ -61,6 +63,8 @@
         {
             return _gameItem.Any(item => item.Value.Name.Equals(itemName));
         }
+
+        #endregion Helper methods
 
         public void ConstructWorld()
         {
@@ -263,17 +267,17 @@
                $"ROOM_ID:      '{_currentRoom.Name}'\n\n";
 
             var dirsToGo = "AVAILIABLE DIRS:\n";
-            
+
             foreach (var direction in _currentRoom.DirectionsToGo)
             {
                 var isActive = direction.active ? "Tru" : "Fls";
                 dirsToGo += $"\t'{direction.id}' -> '{direction.dest}' [{isActive}]\n";
             }
-            
+
             dirsToGo += '\n';
 
             var itemsToCheck = $"ITEMS IN THE ROOM ({_currentRoom.ItemsInTheRoom.Count}):\n";
-            
+
             foreach (var itemName in _currentRoom.ItemsInTheRoom)
             {
                 var selectedItem = _gameItem[itemName];

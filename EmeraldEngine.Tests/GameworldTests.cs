@@ -168,5 +168,27 @@ namespace EmeraldEngine.Tests
             Assert.AreEqual(7, itemsListInGameworld.Length);
             Assert.IsFalse(itemNotPresentInCollection);
         }
+
+        [TestMethod]
+        public void Given_GameroomsCollection_When_GoingThrough_Then_CheckIfEverythingIsAsExpected()
+        {
+            var gameroomNamePrefix = "ROOM_";
+            var availiableSuffuxes = "ABCDEFG";
+            var allRoomsAvailiable = true;
+
+            Assert.IsNotNull(SampleGameworld._currentRoom);
+
+            foreach(var roomLetter in availiableSuffuxes)
+            {
+                if(!SampleGameworld._gameRooms.Any(r => r.Value.Name.Equals($"{gameroomNamePrefix}{roomLetter}")))
+                {
+                    allRoomsAvailiable = false;
+                    break;
+                }
+            }
+
+            Assert.AreEqual(7, availiableSuffuxes.Length);
+            Assert.IsTrue(allRoomsAvailiable);
+        }
     }
 }
