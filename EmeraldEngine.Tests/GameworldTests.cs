@@ -11,7 +11,7 @@ namespace EmeraldEngine.Tests
 
         private static Gameworld SampleGameworld;
 
-        #endregion
+        #endregion Private test properties
 
         [ClassInitialize]
         public static void ClassInit(TestContext context)
@@ -112,26 +112,61 @@ namespace EmeraldEngine.Tests
         [TestMethod]
         public void Given_SampleGameworld_When_PickingItemsInCurrentRoom_Then_CheckPlayersInventory()
         {
-            var rustyKnifeItemId = SampleGameworld._gameItem.First(item => item.Value.Name.Equals("Rusty knife")).Key;
-            var tarotCardItemId = SampleGameworld._gameItem.First(item => item.Value.Name.Equals("Tarot card [XIII]")).Key;
+            var tarotCardItemName = "Rusty knife";
+            var rustyKnifeItemName = "Tarot card [XIII]";
+            var rustyKnifeItem = SampleGameworld._gameItem.First(item => item.Value.Name.Equals(rustyKnifeItemName));
+            var tarotCardItem = SampleGameworld._gameItem.First(item => item.Value.Name.Equals(tarotCardItemName));
 
-            Assert.IsNotNull(tarotCardItemId);
-            Assert.IsNotNull(rustyKnifeItemId);
+            Assert.IsNotNull(tarotCardItem.Value);
+            Assert.IsNotNull(rustyKnifeItem.Value);
+            Assert.AreEqual(rustyKnifeItemName, rustyKnifeItem.Value.Name);
+            Assert.AreEqual(tarotCardItemName, tarotCardItem.Value.Name);
 
             Trace.Write($"Players inventory count: {SampleGameworld._player.Inventory.Count}\n\n");
 
-            SampleGameworld.PickItem(rustyKnifeItemId);
-            Trace.Write($"Picked 'rusty knife'\n");
+            SampleGameworld.PickItem(rustyKnifeItem.Key);
+            Trace.Write($"Picked '{rustyKnifeItem.Value.Name}'\n");
             Trace.Write($"Players inventory count: {SampleGameworld._player.Inventory.Count}\n\n");
 
-            SampleGameworld.PickItem(tarotCardItemId);
-            Trace.Write($"Picked 'tarot card'\n");
+            SampleGameworld.PickItem(tarotCardItem.Key);
+            Trace.Write($"Picked '{tarotCardItem.Value.Name}'\n");
             Trace.Write($"Players inventory count: {SampleGameworld._player.Inventory.Count}\n\n");
 
             Trace.Write(SampleGameworld.CurrentRoomInfoDump());
 
             Assert.AreEqual(2, SampleGameworld._player.Inventory.Count);
             Assert.IsFalse(SampleGameworld._currentRoom.ItemsInTheRoom.Any());
+        }
+
+        [TestMethod]
+        public void Given_ListOfItemNamesToBeFound_When_SearchingForThemInGameworld_Then_CheckIfMissing()
+        {
+            var itemsListInGameworld = new string[] {
+                "Wooden hammer",
+                "Wheat stone",
+                "Rusty knife",
+                "Golden key",
+                "Tarot card [XIII]",
+                "Potato",
+                "Sample item with hardcoded id",
+            };
+
+            var itemNotPresentInCollection = false;
+
+            foreach (var item in itemsListInGameworld)
+            {
+                var itemNameToBeFound = SampleGameworld.HasItemByName(item);
+                Trace.WriteLine($"'{item}' found? - {itemNameToBeFound}");
+
+                if (!itemNameToBeFound)
+                {
+                    itemNotPresentInCollection = true;
+                    break;
+                }
+            }
+
+            Assert.AreEqual(7, itemsListInGameworld.Length);
+            Assert.IsFalse(itemNotPresentInCollection);
         }
     }
 }
