@@ -19,11 +19,17 @@
         {
             NodeValue = default;
             Children = new HashSet<Node<T>>();
+            IsActive = true;
         }
 
         public Node(T ElementValue) : this()
         {
             NodeValue = ElementValue;
+        }
+
+        public Node(T ElementValue, bool active) : this(ElementValue)
+        {
+            IsActive = active;
         }
 
         #endregion Constructors

@@ -21,7 +21,7 @@
 
         #endregion Constructors
 
-        public Node<T>? SearchForNodeWithValue(char t)
+        public Node<T>? SearchForNodeWithValue(T t, bool ignoreNonActiveNodes)
         {
             var numberOfSteps = 0;
             var visited = new Stack<Node<T>>();
@@ -41,11 +41,24 @@
 
                 foreach (var item in currentNode.Children)
                 {
-                    stack.Push(item);
+                    if (item.IsActive || ignoreNonActiveNodes)
+                    {
+                        stack.Push(item);
+                    }
                 }
             }
 
             return null;
+        }
+
+        public Node<T>? SearchForNodeWithValue(T valueToSeek)
+        {
+            return SearchForNodeWithValue(valueToSeek, false);
+        }
+
+        public Node<T>? SearchForNodeWithValueIgnoreNonActiveNodes(T valueToSeek)
+        {
+            return SearchForNodeWithValue(valueToSeek, true);
         }
     }
 }
