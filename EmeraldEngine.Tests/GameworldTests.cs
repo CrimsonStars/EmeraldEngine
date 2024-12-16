@@ -7,7 +7,11 @@ namespace EmeraldEngine.Tests
     [TestClass]
     public class GameworldTests
     {
+        #region Private test properties
+
         private static Gameworld SampleGameworld;
+
+        #endregion Private test properties
 
         [ClassInitialize]
         public static void ClassInit(TestContext context)
@@ -49,8 +53,6 @@ namespace EmeraldEngine.Tests
             Assert.IsNotNull(SampleGameworld._currentRoom);
         }
 
-        #region SANDBOX
-
         [TestMethod]
         public void Given_RoomWithSpecificName_When_GoingTo_Then_CheckIfGoneRight()
         {
@@ -67,24 +69,31 @@ namespace EmeraldEngine.Tests
         [TestMethod]
         public void Given_Gameworld_When_MovingInCertainPath_Then_CheckIfRouteIsCorrect()
         {
-            // A -> B -> C-> E -> C
-            Trace.WriteLine(SampleGameworld.CurrentRoomInfoDump() + '\n');
-
-            SampleGameworld.ChangeCurrentLocation("ROOM_B");
-            SampleGameworld.ChangeCurrentLocation("ROOM_C");
-
-            Assert.IsNotNull(SampleGameworld._currentRoom);
-            Assert.AreEqual("ROOM_C", SampleGameworld._currentRoom.Name);
-
-            SampleGameworld.ChangeCurrentLocation("ROOM_E");
-            Assert.AreEqual("ROOM_E", SampleGameworld._currentRoom.Name);
-
-            SampleGameworld.ChangeCurrentLocation("ROOM_C");
+            // route: A -> B -> C-> E -> C
+            var firstRoom = "ROOM_A";
+            var secondRoom = "ROOM_B";
+            var thirdRoom = "ROOM_C";
+            var fourthRoom = "ROOM_E";
 
             Assert.IsNotNull(SampleGameworld._currentRoom);
-            Assert.AreEqual("ROOM_C", SampleGameworld._currentRoom.Name);
+            Assert.AreEqual(firstRoom, SampleGameworld._currentRoom.Name);
+            Trace.Write(SampleGameworld.CurrentRoomInfoDump() + "\n\n");
 
-            Trace.WriteLine(SampleGameworld.CurrentRoomInfoDump() + '\n');
+            SampleGameworld.ChangeCurrentLocation(secondRoom);
+            SampleGameworld.ChangeCurrentLocation(thirdRoom);
+
+            Assert.IsNotNull(SampleGameworld._currentRoom);
+            Assert.AreEqual(thirdRoom, SampleGameworld._currentRoom.Name);
+
+            SampleGameworld.ChangeCurrentLocation(fourthRoom);
+            Assert.AreEqual(fourthRoom, SampleGameworld._currentRoom.Name);
+
+            SampleGameworld.ChangeCurrentLocation(thirdRoom);
+
+            Assert.IsNotNull(SampleGameworld._currentRoom);
+            Assert.AreEqual(thirdRoom, SampleGameworld._currentRoom.Name);
+
+            Trace.Write(SampleGameworld.CurrentRoomInfoDump() + "\n\n");
         }
 
         [TestMethod]
@@ -103,20 +112,24 @@ namespace EmeraldEngine.Tests
         [TestMethod]
         public void Given_SampleGameworld_When_PickingItemsInCurrentRoom_Then_CheckPlayersInventory()
         {
-            var rustyKnifeItemId = SampleGameworld._gameItem.First(item => item.Value.Name.Equals("Rusty knife")).Key;
-            var tarotCardItemId = SampleGameworld._gameItem.First(item => item.Value.Name.Equals("Tarot card [XIII]")).Key;
+            var tarotCardItemName = "Rusty knife";
+            var rustyKnifeItemName = "Tarot card [XIII]";
+            var rustyKnifeItem = SampleGameworld._gameItem.First(item => item.Value.Name.Equals(rustyKnifeItemName));
+            var tarotCardItem = SampleGameworld._gameItem.First(item => item.Value.Name.Equals(tarotCardItemName));
 
-            Assert.IsNotNull(tarotCardItemId);
-            Assert.IsNotNull(rustyKnifeItemId);
+            Assert.IsNotNull(tarotCardItem.Value);
+            Assert.IsNotNull(rustyKnifeItem.Value);
+            Assert.AreEqual(rustyKnifeItemName, rustyKnifeItem.Value.Name);
+            Assert.AreEqual(tarotCardItemName, tarotCardItem.Value.Name);
 
             Trace.Write($"Players inventory count: {SampleGameworld._player.Inventory.Count}\n\n");
 
-            SampleGameworld.PickItem(rustyKnifeItemId);
-            Trace.Write($"Picked 'rusty knife'\n");
+            SampleGameworld.PickItem(rustyKnifeItem.Key);
+            Trace.Write($"Picked '{rustyKnifeItem.Value.Name}'\n");
             Trace.Write($"Players inventory count: {SampleGameworld._player.Inventory.Count}\n\n");
 
-            SampleGameworld.PickItem(tarotCardItemId);
-            Trace.Write($"Picked 'tarot card'\n");
+            SampleGameworld.PickItem(tarotCardItem.Key);
+            Trace.Write($"Picked '{tarotCardItem.Value.Name}'\n");
             Trace.Write($"Players inventory count: {SampleGameworld._player.Inventory.Count}\n\n");
 
             Trace.Write(SampleGameworld.CurrentRoomInfoDump());
@@ -125,6 +138,57 @@ namespace EmeraldEngine.Tests
             Assert.IsFalse(SampleGameworld._currentRoom.ItemsInTheRoom.Any());
         }
 
-        #endregion SANDBOX
+        [TestMethod]
+        public void Given_ListOfItemNamesToBeFound_When_SearchingForThemInGameworld_Then_CheckIfMissing()
+        {
+            var itemsListInGameworld = new string[] {
+                "Wooden hammer",
+                "Wheat stone",
+                "Rusty knife",
+                "Golden key",
+                "Tarot card [XIII]",
+                "Potato",
+                "Sample item with hardcoded id",
+            };
+
+            var itemNotPresentInCollection = false;
+
+            foreach (var item in itemsListInGameworld)
+            {
+                var itemNameToBeFound = SampleGameworld.HasItemByName(item);
+                Trace.WriteLine($"'{item}' found? - {itemNameToBeFound}");
+
+                if (!itemNameToBeFound)
+                {
+                    itemNotPresentInCollection = true;
+                    break;
+                }
+            }
+
+            Assert.AreEqual(7, itemsListInGameworld.Length);
+            Assert.IsFalse(itemNotPresentInCollection);
+        }
+
+        [TestMethod]
+        public void Given_GameroomsCollection_When_GoingThrough_Then_CheckIfEverythingIsAsExpected()
+        {
+            var gameroomNamePrefix = "ROOM_";
+            var availiableSuffuxes = "ABCDEFG";
+            var allRoomsAvailiable = true;
+
+            Assert.IsNotNull(SampleGameworld._currentRoom);
+
+            foreach(var roomLetter in availiableSuffuxes)
+            {
+                if(!SampleGameworld._gameRooms.Any(r => r.Value.Name.Equals($"{gameroomNamePrefix}{roomLetter}")))
+                {
+                    allRoomsAvailiable = false;
+                    break;
+                }
+            }
+
+            Assert.AreEqual(7, availiableSuffuxes.Length);
+            Assert.IsTrue(allRoomsAvailiable);
+        }
     }
 }

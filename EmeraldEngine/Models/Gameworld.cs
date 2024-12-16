@@ -52,10 +52,19 @@
 
         #endregion Const strings
 
+        #region Helper methods
+
         private string CreateGuid(string prefix)
         {
             return $"{prefix}.{Guid.NewGuid()}";
         }
+
+        public bool HasItemByName(string itemName)
+        {
+            return _gameItem.Any(item => item.Value.Name.Equals(itemName));
+        }
+
+        #endregion Helper methods
 
         public void ConstructWorld()
         {
@@ -250,8 +259,6 @@
             #endregion Construct game rooms for testing
         }
 
-        #region Sandbox
-
         // Mostly for debugging
         public string CurrentRoomInfoDump()
         {
@@ -260,19 +267,23 @@
                $"ROOM_ID:      '{_currentRoom.Name}'\n\n";
 
             var dirsToGo = "AVAILIABLE DIRS:\n";
+
             foreach (var direction in _currentRoom.DirectionsToGo)
             {
                 var isActive = direction.active ? "Tru" : "Fls";
                 dirsToGo += $"\t'{direction.id}' -> '{direction.dest}' [{isActive}]\n";
             }
+
             dirsToGo += '\n';
 
             var itemsToCheck = $"ITEMS IN THE ROOM ({_currentRoom.ItemsInTheRoom.Count}):\n";
+
             foreach (var itemName in _currentRoom.ItemsInTheRoom)
             {
                 var selectedItem = _gameItem[itemName];
                 itemsToCheck += $"\t'{selectedItem.Name}' ({itemName}; pickable: {selectedItem.Pickable})";
             }
+
             itemsToCheck += '\n';
 
             return $"{result}{dirsToGo}{itemsToCheck}";
@@ -303,7 +314,5 @@
                 throw new Exception();
             }
         }
-
-        #endregion Sandbox
     }
 }
