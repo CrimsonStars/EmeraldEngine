@@ -1,7 +1,6 @@
 ﻿namespace EmeraldEngine.Universal.Graphs
 {
     using System.Collections.Generic;
-    using System.Diagnostics;
 
     public class Node<T>
     {

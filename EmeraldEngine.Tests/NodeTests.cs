@@ -2,6 +2,7 @@ namespace EmeraldEngine.Tests
 {
     using EmeraldEngine.Models;
     using EmeraldEngine.Universal.Graphs;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class NodeTests
@@ -25,6 +26,7 @@ namespace EmeraldEngine.Tests
             Assert.IsNotNull(testNode.Children);
             Assert.IsTrue(!testNode.Children.Any());
             Assert.IsTrue(testNode.NodeValue == testValue);
+            Assert.IsInstanceOfType(testValue, typeof(char));
         }
 
         [TestMethod]
@@ -68,6 +70,18 @@ namespace EmeraldEngine.Tests
             Assert.IsTrue(testNode.Children.Any());
             Assert.IsTrue(testNode.Children.Any(c => c.NodeValue.Equals('a')));
             Assert.IsTrue(!testNode.Children.Any(c => c.NodeValue.Equals('x')));
+        }
+
+        [TestMethod]
+        [DataRow(0, false)]
+        [DataRow(1, true)]
+        public void Given_TestNods_When_ExaminatingContent_Then_CheckIfValueAndIsActiveIsCorrect(int val, bool isActiveFlag)
+        {
+            var testNodeA = new Node<int>(val, isActiveFlag);
+
+            Assert.IsNotNull(testNodeA);
+            Assert.AreEqual(testNodeA.NodeValue, val);
+            Assert.AreEqual(testNodeA.IsActive, isActiveFlag);
         }
     }
 }
