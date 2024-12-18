@@ -4,19 +4,68 @@ namespace EmeraldEngine.Models
 {
    public class Room : BaseInformation
    {
-      /// <summary>
-      /// First string = direction_id
-      /// Second string = destination_room_id
-      /// </summary>
-      public Dictionary<string, string> Directions;
-      public List<string> ItemsInRoom;
+      // Names will be changed in the future, for sure
+      #region Properties and fields
+      public List<(string id, string dest, bool active)> DirectionsToGo { get; set; }
+      public List<string> ItemsInTheRoom { get; set; }
+      #endregion
 
-      public Room()
+      #region Constructors
+      public Room() : base()
       {
-         Name = string.Empty;
-         ObjectId = string.Empty;
-         ItemsInRoom = new List<string>();
-         Directions = new Dictionary<string, string>();
+         DirectionsToGo = new List<(string id, string dest, bool active)>();
+         ItemsInTheRoom = new List<string>();
+         ObjectId = $"ROOM.{Guid.NewGuid()}";
       }
+
+      public Room(string id, string name, string desc) : this()
+      {
+         ObjectId = id;
+         Description = desc;
+         Name = name;
+      }
+      #endregion
+
+      public void AddItemsInRoom(params string[] items)
+      {
+         foreach (var item in items)
+         {
+            if (!ItemsInTheRoom.Any(itemz => itemz == item))
+            {
+               ItemsInTheRoom.Add(item);
+            }
+            else
+            {
+               throw new Exception($"Room already has item with id: '{item}'");
+            }
+         }
+      }
+
+      public void GetItem(string itemId)
+      {
+         throw new NotImplementedException("GetItem method for Room is not implemented, yet.");
+      }
+
+      public string ListAvailiableDirections(bool debugMode)
+      {
+         var result = $"AVAILIABLE DIRS: {DirectionsToGo.Count}\n";
+
+         foreach (var dir in DirectionsToGo)
+         {
+            result += $"{dir.id} => {dir.dest}";
+
+            if (debugMode && !dir.active)
+            {
+               result += $" ({dir.active})\n";
+            }
+
+            result += Environment.NewLine;
+         }
+
+         return result;
+      }
+
+      public string ListAvailiableDirections() => ListAvailiableDirections(false);
+
    }
 }

@@ -1,10 +1,7 @@
 ﻿namespace EmeraldEngine.Tests
 {
-    internal class ItemTests
+    public class ItemTests
     {
-        [TestMethod]
-        public void MyTestMethod()
-        {
-        }
+        // TODO: GameItem tests
     }
 }
