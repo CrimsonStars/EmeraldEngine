@@ -1,71 +1,111 @@
-﻿using EmeraldEngine.Universal;
+﻿using EmeraldEngine.Interfaces;
+using EmeraldEngine.Universal;
 
 namespace EmeraldEngine.Models
 {
-   public class Room : BaseInformation
-   {
-      // Names will be changed in the future, for sure
-      #region Properties and fields
-      public List<(string id, string dest, bool active)> DirectionsToGo { get; set; }
-      public List<string> ItemsInTheRoom { get; set; }
-      #endregion
+    public class Room : BaseInformation, IRoom
+    {
+        // Names will be changed in the future, for sure
 
-      #region Constructors
-      public Room() : base()
-      {
-         DirectionsToGo = new List<(string id, string dest, bool active)>();
-         ItemsInTheRoom = new List<string>();
-         ObjectId = $"ROOM.{Guid.NewGuid()}";
-      }
+        #region Properties and fields
 
-      public Room(string id, string name, string desc) : this()
-      {
-         ObjectId = id;
-         Description = desc;
-         Name = name;
-      }
-      #endregion
+        public List<(string id, string dest, bool active)> DirectionsToGo { get; set; }
+        public List<string> ItemsInTheRoom { get; set; }
 
-      public void AddItemsInRoom(params string[] items)
-      {
-         foreach (var item in items)
-         {
-            if (!ItemsInTheRoom.Any(itemz => itemz == item))
+        #endregion Properties and fields
+
+        #region Constructors
+
+        public Room() : base()
+        {
+            DirectionsToGo = new List<(string id, string dest, bool active)>();
+            ItemsInTheRoom = new List<string>();
+            ObjectId = $"ROOM.{Guid.NewGuid()}";
+        }
+
+        public Room(string id, string name, string desc) : this()
+        {
+            ObjectId = id;
+            Description = desc;
+            Name = name;
+        }
+
+        #endregion Constructors
+
+        public void AddItemsInRoom(params string[] items)
+        {
+            foreach (var item in items)
             {
-               ItemsInTheRoom.Add(item);
+                if (!ItemsInTheRoom.Any(itemz => itemz == item))
+                {
+                    ItemsInTheRoom.Add(item);
+                }
+                else
+                {
+                    throw new Exception($"Room already has item with id: '{item}'");
+                }
             }
-            else
+        }
+
+        public void GetItem(string itemId)
+        {
+            throw new NotImplementedException("GetItem method for Room is not implemented, yet.");
+        }
+
+        public string ListAvailiableDirections(bool debugMode)
+        {
+            var result = $"AVAILIABLE DIRS: {DirectionsToGo.Count}\n";
+
+            foreach (var dir in DirectionsToGo)
             {
-               throw new Exception($"Room already has item with id: '{item}'");
-            }
-         }
-      }
+                result += $"{dir.id} => {dir.dest}";
 
-      public void GetItem(string itemId)
-      {
-         throw new NotImplementedException("GetItem method for Room is not implemented, yet.");
-      }
+                if (debugMode && !dir.active)
+                {
+                    result += $" ({dir.active})\n";
+                }
 
-      public string ListAvailiableDirections(bool debugMode)
-      {
-         var result = $"AVAILIABLE DIRS: {DirectionsToGo.Count}\n";
-
-         foreach (var dir in DirectionsToGo)
-         {
-            result += $"{dir.id} => {dir.dest}";
-
-            if (debugMode && !dir.active)
-            {
-               result += $" ({dir.active})\n";
+                result += Environment.NewLine;
             }
 
-            result += Environment.NewLine;
-         }
+            return result;
+        }
 
-         return result;
-      }
+        public string ListAvailiableDirections() => ListAvailiableDirections(false);
 
-      public string ListAvailiableDirections() => ListAvailiableDirections(false);
+        public IRoom AddItem(string itemName)
+        {
+            throw new NotImplementedException();
+        }
 
-   }
+        public IRoom AddRoom(string roomName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IRoom AddRoom(string roomName, bool isActive)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IRoom SetObjectId(string objectId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IRoom SetDescription(string desc)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IRoom AddDirection(string id, string dest, bool active)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IRoom AddDirection(string id, string dest)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
