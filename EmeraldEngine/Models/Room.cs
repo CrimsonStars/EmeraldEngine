@@ -73,44 +73,5 @@ namespace EmeraldEngine.Models
 
         public string ListAvailiableDirections() => ListAvailiableDirections(false);
 
-      public IRoom AddItem(string itemId)
-      {
-         if (Gameworld.Instance().HasItemById(itemId))
-         {
-            ItemsInTheRoom.Add(itemId);
-         }
-
-         return this;
-      }
-
-        public IRoom AddRoom(string roomName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IRoom AddRoom(string roomName, bool isActive)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IRoom SetObjectId(string objectId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IRoom SetDescription(string desc)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IRoom AddDirection(string id, string dest, bool active)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IRoom AddDirection(string id, string dest)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
