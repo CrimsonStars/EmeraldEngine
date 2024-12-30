@@ -73,10 +73,15 @@ namespace EmeraldEngine.Models
 
         public string ListAvailiableDirections() => ListAvailiableDirections(false);
 
-        public IRoom AddItem(string itemName)
-        {
-            throw new NotImplementedException();
-        }
+      public IRoom AddItem(string itemId)
+      {
+         if (Gameworld.Instance().HasItemById(itemId))
+         {
+            ItemsInTheRoom.Add(itemId);
+         }
+
+         return this;
+      }
 
         public IRoom AddRoom(string roomName)
         {
