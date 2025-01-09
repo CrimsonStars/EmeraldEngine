@@ -1,11 +1,11 @@
 ﻿namespace EmeraldEngine.Universal
 {
-    internal interface IBasicInformation
+    public interface IBasicInformation
     {
-        public void SetName(string name);
+        public IBasicInformation SetName(string name);
 
-        public void SetDescription(string desc);
+        public IBasicInformation SetDescription(string desc);
 
-        public void SetObjectId(string id);
+        public IBasicInformation SetObjectId(string id);
     }
 }

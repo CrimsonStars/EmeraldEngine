@@ -17,19 +17,13 @@
             ObjectId = objectId;
         }
 
-        public void SetName(string name)
-        {
-            throw new NotImplementedException();
-        }
+        public IBasicInformation SetName(string name)
+        { return this; }
 
-        public void SetDescription(string desc)
-        {
-            throw new NotImplementedException();
-        }
+        public IBasicInformation SetDescription(string desc)
+        { return this; }
 
-        public void SetObjectId(string id)
-        {
-            throw new NotImplementedException();
-        }
+        public IBasicInformation SetObjectId(string id)
+        { return this; }
     }
 }
