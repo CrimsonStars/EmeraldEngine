@@ -4,8 +4,14 @@
     {
         public IBasicInformation SetName(string name);
 
-        public IBasicInformation SetDescription(string desc);
-
         public IBasicInformation SetObjectId(string id);
+
+        public IBasicInformation SetBasicInformation(string id, string name);
+
+        /// <summary>
+        /// Warning! Method should not override current value if present.
+        /// </summary>
+        /// <returns></returns>
+        public IBasicInformation SetDescription(string desc);
     }
 }
