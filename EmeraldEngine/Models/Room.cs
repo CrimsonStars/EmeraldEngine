@@ -30,6 +30,10 @@ namespace EmeraldEngine.Models
             Name = name;
         }
 
+        public Room(string id, string name) : this(id, name, string.Empty)
+        {
+        }
+
         #endregion Constructors
 
         public void AddItemsInRoom(params string[] items)
@@ -73,5 +77,50 @@ namespace EmeraldEngine.Models
 
         public string ListAvailiableDirections() => ListAvailiableDirections(false);
 
+        #region Interface implementation
+
+        public IRoom AddItem(string itemObjectId)
+        {
+            if (!string.IsNullOrEmpty(itemObjectId))
+            {
+                ItemsInTheRoom.Add(itemObjectId);
+            }
+            else
+            {
+                throw new Exception($"Item id '{itemObjectId}' already exists in items collection");
+            }
+
+            return this;
+        }
+
+        public IRoom AddRoom(string roomObjectId, string changeActivator, bool isActive)
+        {
+            if (!string.IsNullOrEmpty(roomObjectId) && !string.IsNullOrEmpty(changeActivator)
+                && !DirectionsToGo.Any(dir => dir.id.Equals(roomObjectId)))
+            {
+                DirectionsToGo.Add((roomObjectId, changeActivator, isActive));
+            }
+            else
+            {
+                throw new Exception($"Direction id '{roomObjectId}' already exists in items collection or is empty");
+            }
+
+            return this;
+        }
+
+        public IRoom AddDirection(string id, string dest, bool active)
+        {
+            //if (!string.IsNullOrEmpty(itemObjectId) && !ItemsInTheRoom.Contains(itemObjectId))
+            //{
+            //    ItemsInTheRoom.Add(itemObjectId);
+            //}
+            //else
+            //{
+            //    throw new Exception($"Item id '{itemObjectId}' already exists in items collection");
+            //}
+            return this;
+        }
+
+        #endregion Interface implementation
     }
 }

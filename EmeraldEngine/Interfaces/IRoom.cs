@@ -2,15 +2,12 @@
 {
     public interface IRoom
     {
-        public IRoom AddItem(string itemName);
+        public IRoom AddItem(string itemObjectId);
 
-        public IRoom AddRoom(string roomName, bool isActive);
+        public IRoom AddRoom(string roomObjectId, string changeActivator, bool isActive);
 
-        public IRoom AddRoom(string roomName) => AddRoom(roomName, true);
-
-        public IRoom SetObjectId(string objectId);
-
-        public IRoom SetDescription(string desc);
+        public IRoom AddRoom(string roomObjectId, string changeActivator)
+            => AddRoom(roomObjectId, changeActivator, true);
 
         public IRoom AddDirection(string id, string dest, bool active);
 
