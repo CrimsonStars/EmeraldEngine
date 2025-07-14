@@ -35,7 +35,7 @@ namespace EmeraldEngine.Tests
         }
 
         [TestMethod]
-        public void Given_TesRoom_When_CheckPropertyName_Then_CheckIfValid()
+        public void Given_TestRoom_When_CheckPropertyName_Then_CheckIfValid()
         {
             Assert.IsNotNull(testRoom);
             Assert.IsNotNull(testRoom.Name);
@@ -43,7 +43,7 @@ namespace EmeraldEngine.Tests
         }
 
         [TestMethod]
-        public void Given_TesRoom_When_CheckPropertyId_Then_CheckIfValid()
+        public void Given_TestRoom_When_CheckPropertyId_Then_CheckIfValid()
         {
             Assert.IsNotNull(testRoom);
             Assert.IsNotNull(testRoom.ObjectId);
@@ -51,11 +51,13 @@ namespace EmeraldEngine.Tests
         }
 
         [TestMethod]
-        public void Given_TesRoom_When_CheckPropertyDescription_Then_CheckIfValid()
+        public void Given_TestRoom_When_CheckPropertyDescription_Then_CheckIfValid()
         {
             Assert.IsNotNull(testRoom);
             Assert.IsNotNull(testRoom.Description);
             Assert.AreEqual(testRoomDesc, testRoom.Description);
         }
+
+        
     }
 }

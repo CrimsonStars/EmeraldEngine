@@ -4,7 +4,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class InterfaceTests
+    public class BasicInformationInterfaceTests
     {
         private string testRoomName = "testRoomName";
         private string testRoomId = "tempRoomId";
