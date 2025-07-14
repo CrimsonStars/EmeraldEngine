@@ -8,6 +8,7 @@ namespace EmeraldEngine.Tests
     public class RoomInterfaceTests
     {
         #region Private test properties
+
         private static Gameworld SampleGameworld;
         private const string informationText = "ERROR: Test method '{0}()' was not implemented, yet.";
         private static Room? testRoom;
@@ -15,6 +16,7 @@ namespace EmeraldEngine.Tests
         private static readonly string testRoomId = "TEST_ROOM_ID";
         private static readonly string testRoomDesc = string.Empty;
         private static readonly string testRoomName = "TEST_ROOM_NAME";
+
         #endregion Private test properties
 
         [ClassInitialize]
@@ -25,14 +27,12 @@ namespace EmeraldEngine.Tests
             //SampleGameworld.ConstructWorldForIRoomTests();
         }
 
-
         [Ignore]
         [TestMethod]
         public void CreateSampleGameworld()
         {
             Assert.Fail(string.Format(informationText, MethodBase.GetCurrentMethod().Name));
         }
-
 
         [TestMethod]
         public void Given_TesRoom_When_CheckPropertyName_Then_CheckIfValid()
