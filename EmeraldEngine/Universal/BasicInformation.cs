@@ -19,19 +19,23 @@ namespace EmeraldEngine.Universal
             ObjectId = objectId;
         }
 
-        IBasicInformation IBasicInformation.SetName()
+        public IBasicInformation SetName(string name)
         {
-            throw new NotImplementedException();
+            Name = name; 
+            return this;
         }
 
-        IBasicInformation IBasicInformation.SetObjectId()
+        public IBasicInformation SetObjectId(string objectId)
         {
-            throw new NotImplementedException();
+            ObjectId = objectId;
+            return this;
         }
 
-        IBasicInformation IBasicInformation.SetIdAndName()
+        public IBasicInformation SetIdAndName(string objectId, string name)
         {
-            throw new NotImplementedException();
+            SetName(name);
+            SetObjectId(objectId);
+            return this;
         }
     }
 }

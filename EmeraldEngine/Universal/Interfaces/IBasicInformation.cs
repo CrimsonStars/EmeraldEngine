@@ -2,8 +2,8 @@
 {
     public interface IBasicInformation
     {
-        public IBasicInformation SetName();
-        public IBasicInformation SetObjectId();
-        public IBasicInformation SetIdAndName();
+        public IBasicInformation SetName(string name);
+        public IBasicInformation SetObjectId(string objectId);
+        public IBasicInformation SetIdAndName(string objectId, string name);
     }
 }
