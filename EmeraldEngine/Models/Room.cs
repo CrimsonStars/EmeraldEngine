@@ -2,7 +2,7 @@
 
 namespace EmeraldEngine.Models
 {
-    public class Room : BaseInformation
+    public class Room : BasicInformation
     {
         // Names will be changed in the future, for sure
         #region Properties and fields

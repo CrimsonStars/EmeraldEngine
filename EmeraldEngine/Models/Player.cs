@@ -12,7 +12,7 @@ namespace EmeraldEngine.Models
     /// Need to change in the future some element types/collections.
     /// For now it's just a placeholder for things to come.
     /// </summary>
-    public class Player: BaseInformation
+    public class Player: BasicInformation
     {
         public List<Item> Inventory { get; set; }
 
