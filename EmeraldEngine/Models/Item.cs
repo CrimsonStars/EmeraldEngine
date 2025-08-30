@@ -2,7 +2,7 @@
 
 namespace EmeraldEngine.Models
 {
-    public class Item : BaseInformation
+    public class Item : BasicInformation
     {
         public float Weight { get; set; }
         public float Value { get; set; }
