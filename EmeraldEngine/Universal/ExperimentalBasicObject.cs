@@ -22,7 +22,8 @@ namespace EmeraldEngine.Universal
 
         public IExperimentalBasicInformation SetDescription(string description)
         {
-            throw new NotImplementedException();
+            Description = description;
+            return this;
         }
     }
 }
